@@ -1,8 +1,9 @@
-import createCmd from "./commands/create.js";
-import deleteCmd from "./commands/delete.js";
-import initCmd from "./commands/init.js";
-import listCmd from "./commands/list.js";
-import { loadContext, saveContext } from "./lib/context.js";
+const { loadContext, saveContext } = require("./lib/context.js");
+
+const initCmd = require("./commands/init");
+const createCmd = require("./commands/create");
+const deleteCmd = require("./commands/delete");
+const listCmd = require("./commands/list");
 
 const PATH = process.env.SRLPM_PATH;
 
@@ -10,7 +11,7 @@ const execCmd = (cmd, args) => {
   if(cmd == "init"){
     return initCmd({ root: PATH });
   }
-  const ctx = loadContext();
+  const ctx = loadContext(PATH);
   ctx.root = PATH;
 
   switch(cmd){

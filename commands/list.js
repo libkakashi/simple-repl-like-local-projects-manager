@@ -1,4 +1,4 @@
-import { execSync } from "child_process";
+const { execSync } = require("child_process");
 
 function listCmd(ctx){
   for(const name in ctx.projects){
@@ -9,9 +9,9 @@ function listCmd(ctx){
     - description: ${project.description}
     - size: `);
 
-    execSync(`du -hs ${process.env.SRLPM_PATH}/${name}`, { stdio: "inherit" });
+    execSync(`du -hs ${ctx.root}/${name}`, { stdio: "inherit" });
     console.log();
   }
 };
 
-export default listCmd;
+module.exports = listCmd;

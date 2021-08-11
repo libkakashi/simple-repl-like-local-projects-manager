@@ -1,5 +1,5 @@
-import { execSync } from "child_process";
-import cuteName from "../lib/cuteName.js";
+const { execSync } = require("child_process");
+const cuteName = require("../lib/cuteName");
 
 function createCmd(ctx, { name, language, description }){
   if(name != "_default" && ctx.projects[name]){
@@ -12,9 +12,9 @@ function createCmd(ctx, { name, language, description }){
   }
 
   ctx.projects[name] = { language, description };
-  execSync(`mkdir ${process.env.SRLPM_PATH}/${name}`, { stdio: "inherit" });
+  execSync(`mkdir ${ctx.root}/${name}`, { stdio: "inherit" });
 
-  console.log(`Created project $SRLPM_PATH/${name}`);
+  console.log(`Created project ${ctx.root}/${name}`);
 };
 
-export default createCmd;
+module.exports = createCmd;

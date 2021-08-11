@@ -1,10 +1,10 @@
-import { execSync } from "child_process";
+const { execSync } = require("child_process");
 
 function initCmd(ctx){
-  if(!process.env.SRLPM_PATH){
+  if(!ctx.root){
     throw new Error("Define SRLPM_PATH env var");
   }
-  execSync(`echo "{\\"projects\\": {}}" > ${process.env.SRLPM_PATH}/context.json`);
+  execSync(`echo "{\\"projects\\": {}}" > ${ctx.root}/context.json`);
 };
 
-export default initCmd;
+module.exports = initCmd;

@@ -1,4 +1,4 @@
-import { execSync } from "child_process";
+const { execSync } = require("child_process");
 
 function deleteCmd(ctx, { name }){
   if(!name){
@@ -8,9 +8,9 @@ function deleteCmd(ctx, { name }){
     throw new Error("Project doesn't exist.");
   }
   delete ctx.projects[name];
-  execSync(`rm -rf ${process.env.SRLPM_PATH}/${name}`, { stdio: "inherit" });
+  execSync(`rm -rf ${ctx.root}/${name}`, { stdio: "inherit" });
 
-  console.log(`Created project ${name}`);
+  console.log(`Deleted project ${name}`);
 };
 
-export default deleteCmd;
+module.exports = deleteCmd;
